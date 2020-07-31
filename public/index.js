@@ -1,6 +1,6 @@
 let transactions = [];
 let myChart;
-
+//loads the data to client
 fetch("/api/transaction")
   .then(response => {
     return response.json();
@@ -15,7 +15,9 @@ fetch("/api/transaction")
 
 function populateTotal() {
   // reduce transaction amounts to a single total value
+
   const total = transactions.reduce((total, t) => {
+    //make sure its a number
     return total + parseInt(t.value);
   }, 0);
 
@@ -23,6 +25,8 @@ function populateTotal() {
   totalEl.textContent = total;
 }
 
+
+//populates data to the body
 function populateTable() {
   const tbody = document.querySelector("#tbody");
   tbody.innerHTML = "";
@@ -78,7 +82,7 @@ function populateChart() {
     }
   });
 }
-
+//isAdding is a boolean, either adding or not adding
 function sendTransaction(isAdding) {
   const nameEl = document.querySelector("#t-name");
   const amountEl = document.querySelector("#t-amount");
